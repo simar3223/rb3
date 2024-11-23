@@ -16,10 +16,10 @@ jobs:
           Invoke-WebRequest -Uri "https://setup.rbxcdn.com/version-8aa36bbf0eb1494a-RobloxPlayerInstaller.exe" -OutFile "RobloxPlayerInstaller.exe"
           dir RobloxPlayerInstaller.exe
 
-      # Step 2: Run Roblox Player Installer
+      # Step 2: Run Roblox Player Installer using PowerShell
       - name: Run Roblox Player Installer
         run: |
-          start /wait RobloxPlayerInstaller.exe
+          Start-Process -FilePath "RobloxPlayerInstaller.exe" -Wait
           
       # Step 3: Downloading & Installing Essentials
       - name: Downloading & Installing Essentials

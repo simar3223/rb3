@@ -1,0 +1,41 @@
+name: Avica and Roblox Setup
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+
+jobs:
+  build:
+    name: Start Building...
+    runs-on: windows-latest
+    timeout-minutes: 360
+    
+    steps:
+      # Step 1: Download Roblox Player Installer
+      - name: Download Roblox Player Installer
+        run: |
+          Invoke-WebRequest -Uri "https://setup.rbxcdn.com/version-8aa36bbf0eb1494a-RobloxPlayerInstaller.exe" -OutFile "RobloxPlayerInstaller.exe"
+          dir RobloxPlayerInstaller.exe
+
+      # Step 2: Run Roblox Player Installer
+      - name: Run Roblox Player Installer
+        run: |
+          start /wait RobloxPlayerInstaller.exe
+          
+      # Step 3: Downloading & Installing Essentials
+      - name: Downloading & Installing Essentials
+        run: |
+          Invoke-WebRequest -Uri "https://gitlab.com/raposabrty/pcrdp/-/raw/main/Downloads.bat" -OutFile "Downloads.bat"
+          cmd /c Downloads.bat
+
+      # Step 4: Show Website
+      - name: Show Website
+        run: cmd /c show.bat
+
+      # Step 5: Time Counter (run in background, fixing start /b issue)
+      - name: Time Counter
+        run: |
+          start cmd /c loop.bat
+
+      # Step 6: Debug Log
+      - name: Log Time Counter Completion
+        run: echo "Time Counter Completed."
